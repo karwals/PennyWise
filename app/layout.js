@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono,Outfit } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,12 +17,10 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-
 export const metadata = {
   title: "PennyWise",
   description: "Master Your Money One Expense at a Time",
 };
-
 
 export default function RootLayout({ children }) {
   return (
@@ -29,7 +28,11 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ClerkProvider>
+          {children}
+        </ClerkProvider>
+      </body>
     </html>
   );
 }

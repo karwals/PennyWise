@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             
             <a
-              href="#"
+              href="/sign-in"
               className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow-2xl hover:bg-primary/60 focus:outline-none sm:w-auto"
             >
               Get Started
