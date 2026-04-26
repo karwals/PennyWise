@@ -1,10 +1,10 @@
 import React from 'react'
-function Dashboard() {
+function Budgets() {
     return(
         <div>
-            Dashboard
+            Budgets
         </div>
     )
 }
 
-export default Dashboard
+export default Budgets

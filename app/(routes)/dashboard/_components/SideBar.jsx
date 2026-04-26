@@ -1,48 +1,63 @@
 import React from 'react'
-import{LayoutDashboard, PiggyBank, BanknoteArrowDown, CircleFadingArrowUp} from 'lucide-react'
+import{LayoutDashboard, PiggyBank, BanknoteArrowDown, CircleFadingArrowUp, User} from 'lucide-react'
+import { UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
+
 function SideBar() {
     const menuList=[
         {
             id: 1,
             name: "Dashboard",
-            icon: LayoutDashboard
+            icon: LayoutDashboard,
+            path: "/dashboard"
         },
         {
             id: 2,
-            name: "Budget",
-            icon: PiggyBank
+            name: "Budgets",
+            icon: PiggyBank,
+            path: "/dashboard/budgets"
         },
         {
             id: 3,
             name: "Expenses",
-            icon: BanknoteArrowDown
+            icon: BanknoteArrowDown,
+            path: "/dashboard/expenses"
         },
         {
             id: 4,
             name: "Upgrade",
-            icon: CircleFadingArrowUp    
+            icon: CircleFadingArrowUp,
+            path: "/dashboard/upgrade"
         }
     ]
+
+
 
     return (
         <div className="h-screen p-5 border shadow-sm">
             <img src="/logo.svg" 
             alt="Logo"
             width={160}
-            hight={100}
+            height={100}
             />
             <div className='mt-5'>
                 {menuList.map((menu,index)=>(
-                    <h2 className="flex gap-2 item-center
+                    <Link href={menu.path} key={menu.id}>
+                    <h2 className={`flex gap-2 items-center
                     text-gray-500 font-medium
                     p-5 cursor-pointer rounded-md
-                    hover:text-primary hover:bg-primary/20 hover:underline">
+                    hover:text-primary hover:bg-primary/20 hover:underline
+                    `}>
                         <menu.icon/>
                         {menu.name}
                     </h2>
+                    </Link>
                 ))}
             </div>
-
+            <div className='fixed bottom-10 p-5 flex gap-2 items-center'>
+                <UserButton/>
+                profile
+            </div>
         </div>
     )
 }

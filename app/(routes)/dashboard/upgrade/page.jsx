@@ -1,10 +1,10 @@
 import React from 'react'
-function Dashboard() {
+function Upgrade() {
     return(
         <div>
-            Dashboard
+            Upgrade
         </div>
     )
 }
 
-export default Dashboard
+export default Upgrade
