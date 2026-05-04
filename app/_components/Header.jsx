@@ -21,6 +21,10 @@ function Header() {
       </Show>
 
       <Show when="signed-in">
+        <Button className="hover:bg-primary/60" size="lg" 
+        herf="/">
+          Dashboard
+        </Button>
         <UserButton />
       </Show>
     </div>
