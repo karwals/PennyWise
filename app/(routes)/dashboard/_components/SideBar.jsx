@@ -35,7 +35,12 @@ function SideBar() {
 
     return (
         <div className="h-screen p-5 border shadow-sm">
-            <img src="/logo.svg" 
+            <img src="/logo.svg"
+            className="flex gap-2 items-center
+                    text-gray-500 font-medium
+                    p-5 cursor-pointer rounded-md
+                    hover:text-primary hover:bg-primary/20 hover:underline
+                    "
             alt="Logo"
             width={160}
             height={100}
@@ -43,11 +48,11 @@ function SideBar() {
             <div className='mt-5'>
                 {menuList.map((menu,index)=>(
                     <Link href={menu.path} key={menu.id}>
-                    <h2 className={`flex gap-2 items-center
+                    <h2 className="flex gap-2 items-center
                     text-gray-500 font-medium
                     p-5 cursor-pointer rounded-md
                     hover:text-primary hover:bg-primary/20 hover:underline
-                    `}>
+                    ">
                         <menu.icon/>
                         {menu.name}
                     </h2>

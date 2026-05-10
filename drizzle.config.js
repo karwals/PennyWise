@@ -1,11 +1,13 @@
-import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.local" });
 
 export default defineConfig({
     schema: "./utils/schema.js",
     out: "./drizzle",
     dialect: "postgresql",
     dbCredentials: {
-        url: 'postgresql://neondb_owner:npg_dfbou3lEJIn7@ep-still-block-a717as7r-pooler.ap-southeast-2.aws.neon.tech/PennyWise?sslmode=require&channel_binding=require',
+        url: process.env.NEXT_PUBLIC_DATABASE_URL,
     },
 });
