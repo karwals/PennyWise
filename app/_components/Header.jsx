@@ -15,14 +15,14 @@ function Header() {
       />
       
       <Show when="signed-out">
-        <Button className="hover:bg-primary/60" size="lg">
+        <Button className="hover:bg-primary/60">
           <Link href="/sign-in">Get Started</Link>
         </Button>
       </Show>
 
       <Show when="signed-in">
         <div className="flex items-center">
-          <Button className="hover:bg-primary/60" style={{margin: '0px 20px 0px 0px'}} size="lg">
+          <Button className="hover:bg-primary/60" style={{margin: '0px 20px 0px 0px'}}>
             <Link href="/dashboard">Dashboard</Link>
           </Button>
           <UserButton className="center"/>
