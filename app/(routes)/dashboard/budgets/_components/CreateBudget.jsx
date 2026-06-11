@@ -25,28 +25,22 @@ import { toast } from 'sonner';
 function CreateBudget() {
 
 
-  /*hold the selected emoji icon */
   const [emojiIcon,setEmojiIcon]=useState('💰');
   const [openEmojiPicker,setOpenEmojiPicker]=useState(false);
 
-  /*hold the budget name */
   const [name, setName] = useState('');
 
-  /*hold the budget amount */
   const [amount, setAmount] = useState('');
 
-  /*gets the current logged in user */
   const {user}=useUser();
 
-  /* Save new budget to database */
   const onCreatBudget=async()=>{
     /*if user is not loaded or user is not available */
     if (!user) {
       toast("User is still loading");
       return;
     }
-
-    /*get the email address of the current user */
+  
     const email = user.primaryEmailAddress?.emailAddress;
     
     /* Add budget details into table */

@@ -2,7 +2,7 @@ import React from 'react'
 import{LayoutDashboard, PiggyBank, BanknoteArrowDown, CircleFadingArrowUp, User} from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
-
+/*links for the other pages*/
 function SideBar() {
     const menuList=[
         {
@@ -32,7 +32,7 @@ function SideBar() {
     ]
 
 
-
+/*Sidebar with links to the other pages*/
     return (
         <div className="h-screen p-5 border shadow-sm">
             <img src="/logo.svg"
@@ -45,6 +45,7 @@ function SideBar() {
             width={160}
             height={100}
             />
+            {/* Sidebar links for switching between dashboard sections. */}
             <div className='mt-5'>
                 {menuList.map((menu,index)=>(
                     <Link href={menu.path} key={menu.id}>

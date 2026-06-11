@@ -18,6 +18,7 @@ function DashboardLayout({ children }) {
         user&&checkUserBugets();
     },[user])
     
+    // Look up the current user's budgets before showing the dashboard.
     const checkUserBugets=async()=>{
         const result=await db.select()
         .from(Budgets)

@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-
+/* The main part of the landing page for the wedsite*/
 export default function Hero() {
   return (
-    <section className="bg-gray-50 flex items-center flex-col">
+    <div className="bg-gray-50 flex items-center flex-col">
       <div className="mx-auto max-w-7xl px-4 py-32 
       lg:flex">
         
@@ -46,6 +46,6 @@ export default function Hero() {
       height={700}
       className='mt-5 rounded-xl border-2'
       />
-    </section>
+    </div>
   );
 }
