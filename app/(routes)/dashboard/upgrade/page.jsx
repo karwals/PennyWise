@@ -1,6 +1,6 @@
 import React from 'react'
 function Upgrade() {
-    return(
+    return (
         <div>
             Upgrade
         </div>

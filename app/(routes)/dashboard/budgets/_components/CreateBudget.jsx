@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 
 
 
-function CreateBudget() {
+function CreateBudget({refresData}) {
 
 
   const [emojiIcon,setEmojiIcon]=useState('💰');
@@ -54,6 +54,7 @@ function CreateBudget() {
     }).returning({insertedId:Budgets.id})
     if(result)
     {
+      refresData()
       toast("New budget created successfully!")
     }
   }
@@ -116,7 +117,7 @@ function CreateBudget() {
               
               
             </div>
-            <DialogFooter className="sm:justify-start">
+            <DialogFooter className="sm:justify-start border-t border-primary">
               {/*Close the dialog after the budget is created*/}
               <DialogClose asChild>
                 <Button
