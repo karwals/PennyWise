@@ -37,9 +37,9 @@ function BudgetList() {
       <div className="grid grid-cols-1
       md:grid-cols-2 lg:grid-cols-3
       gap-5">
-      {/*Makes sure to get the new budget list afte a new one is added so the new one is also there*/}
+      {/*Makes sure to get the new budget list after a new one is added so the new one is also there*/}
       <CreateBudget
-      refresData={getBudgetList}
+      refreshData={getBudgetList}
       />
       {/*while the budget list is loading it will show the skeleton loader
       and once it is loaded it will show the budget card*/}

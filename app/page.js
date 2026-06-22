@@ -6,8 +6,10 @@ import Hero from "./_components/Hero";
 export default function Home() {
   return (
     <div>
-      <Header/>
-      <Hero/>
+      <div className="sticky top-0 z-50">
+        <Header/>
+      </div>
+      <Hero/> 
     </div>
   );
 }

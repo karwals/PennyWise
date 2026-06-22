@@ -6,7 +6,7 @@ import React from "react";
 /*Top nav bar with the logo and sign-in/sign-out options and if you are signed in the dashboard option */
 function Header() {
   return (
-    <div className="p-5 flex items-center justify-between shadow-xl border backdrop-blur-md bg-white/50">
+    <div className="p-5 flex items-center justify-between shadow-xl border">
       <Image
         href = "/app"
         src="/logo.svg"

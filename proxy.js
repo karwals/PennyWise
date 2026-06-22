@@ -3,6 +3,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
+  "/learnMore"
 ]);
 /*what make it so that you can access only the public pages and not the other ones*/
 export default clerkMiddleware(async (auth, req) => {

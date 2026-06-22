@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 
 
 
-function CreateBudget({refresData}) {
+function CreateBudget({refreshData}) {
 
 
   const [emojiIcon,setEmojiIcon]=useState('💰');
@@ -34,7 +34,7 @@ function CreateBudget({refresData}) {
 
   const {user}=useUser();
 
-  const onCreatBudget=async()=>{
+  const onCreateBudget=async()=>{
     /*if user is not loaded or user is not available */
     if (!user) {
       toast("User is still loading");
@@ -54,7 +54,7 @@ function CreateBudget({refresData}) {
     }).returning({insertedId:Budgets.id})
     if(result)
     {
-      refresData()
+      refreshData()
       toast("New budget created successfully!")
     }
   }
@@ -62,8 +62,8 @@ function CreateBudget({refresData}) {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="bg-slate-100 p-10 rounded-md 
-          items-center flex flex-col border-2 border-dashed 
+          <div className="bg-slate-100 p-10 rounded-lg 
+          items-center flex flex-col border border-dashed 
           cursor-pointer hover:shadow-md hover:-translate-y-2 duration-300"
           onClick={() => {
             /* clear old name, amount, and emoji data*/
@@ -83,7 +83,7 @@ function CreateBudget({refresData}) {
             Master Your Money One Expense at a Time
             </DialogDescription>
           </DialogHeader>
-            <div className = "">
+            <div>
               {/*emoji pick for budget card*/}
               <h2 className="text-black font-medium my-1">Emoji</h2>
               <Button variant="outline"
@@ -101,13 +101,13 @@ function CreateBudget({refresData}) {
                 }}
                 />
               </div>
-              {/*the place for the budget name input */}
-              <div className='mt-3'>
+              {/*The place for the budget details input */}
+              <div className="mt-3">
                 <h2 className="text-black font-medium my-1">Budget Name</h2>
                 <Input placeholder="e.g. Home Decor" 
                 onChange={(e)=>setName(e.target.value)}/>
               </div>
-              <div className='mt-3'>
+              <div className="mt-3">
                 <h2 className="text-black font-medium my-1">Budget Amount</h2>
                 <Input 
                 type="number"
@@ -121,12 +121,12 @@ function CreateBudget({refresData}) {
               {/*Close the dialog after the budget is created*/}
               <DialogClose asChild>
                 <Button
-                  /*Disable the create budget button if either the name or amount is empty */
-                  disabled={!(name&&amount)}
-                  onClick={onCreatBudget}
+                /*Disable the create budget button if either the name or amount is empty */
+                disabled={!(name&&amount)}
+                onClick={onCreateBudget}
                 
-                className='cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300 
-                w-full'>Create Budget</Button>
+                className="cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300 
+                w-full">Create Budget</Button>
               </DialogClose>
             </DialogFooter>
         </DialogContent>
