@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-/* The main part of the landing page for the wedsite*/
+/* The main part of the landing page for the website*/
 export default function Hero() {
   return (
     <div className="bg-gray-50 flex items-center flex-col">
@@ -20,7 +20,7 @@ export default function Hero() {
             Easily monitor your expenses, set budgets, and understand
             where your money goes all in one place.
           </p>
-
+          {/*The buttons on the landing page*/}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             
             <a

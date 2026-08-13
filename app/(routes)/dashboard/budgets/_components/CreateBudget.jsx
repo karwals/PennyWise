@@ -1,4 +1,3 @@
-/* Run component in browser */
 "use client"
 
 import React, { useState } from 'react'
@@ -21,7 +20,7 @@ import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
 
 
-
+/* Creating a new budget popup and saving it to the database. */
 function CreateBudget({refreshData}) {
 
 

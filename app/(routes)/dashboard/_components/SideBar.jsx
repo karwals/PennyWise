@@ -32,7 +32,7 @@ function SideBar() {
     ]
 
 
-/*Sidebar with links to the other pages*/
+/*Sidebar with the links to the other pages from above*/
     return (
         <div className="h-screen p-5 border shadow-sm">
             <img src="/logo.svg"

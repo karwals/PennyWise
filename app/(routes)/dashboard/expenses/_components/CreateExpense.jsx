@@ -5,6 +5,7 @@ import { Budgets, Expenses } from '@/utils/schema';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
+/*Create expense form */
 function CreateExpense({budgetId, user, refreshData}) {
     const [name, setName] = useState();
     const [amount, setAmount] = useState();

@@ -1,6 +1,6 @@
 import React from 'react'
 import BudgetList from './_components/BudgetList'
-
+/* Page for displaying the user's budgets */
 function Budgets() {
     return (
         <div className="p-5">

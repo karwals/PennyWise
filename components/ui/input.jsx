@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+// shadcn/ui styled text input, used for the name/amount fields in the create-budget and create-expense forms
 function Input({
   className,
   type,

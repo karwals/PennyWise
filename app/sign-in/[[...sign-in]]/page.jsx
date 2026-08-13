@@ -3,6 +3,7 @@ import { SignIn } from "@clerk/nextjs";
 export default function Page() {
     return (
         <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary/10">
+            {/*Background text for the sign-in page */}
             <div className="absolute -inset-100 z-0 flex flex-wrap gap-8 opacity-10 rotate-[-15deg] text-6xl font-bold text-primary pointer-events-none">
                 {Array.from({length:20}).map((_,rowIndex)=>(
                     <div

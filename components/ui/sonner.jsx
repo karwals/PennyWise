@@ -4,6 +4,7 @@ import { useTheme } from "next-themes"
 import { Toaster as Sonner } from "sonner";
 import { CheckCircleIcon, InfoIcon, WarningIcon, XCircleIcon, SpinnerIcon } from "@phosphor-icons/react"
 
+/*imported library for toast notifications for when something was done successfully*/
 const Toaster = ({
   ...props
 }) => {

@@ -8,7 +8,7 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import BudgetItem from '../../budgets/_components/BudgetItem'
 import CreateExpense from '../_components/CreateExpense'
 import ListOfExpenses from '../_components/ListOfExpenses'
-
+/*Expenses page(add and view expenses) */
 function ExpensesScreen() {
     const params = useParams()
     const {user} = useUser()

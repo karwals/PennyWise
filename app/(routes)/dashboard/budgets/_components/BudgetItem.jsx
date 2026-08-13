@@ -1,6 +1,7 @@
+/* Card that displays a single budget's summary and spend progress, linking to its expenses page. */
 import Link from 'next/link'
 import React from 'react'
-
+/*The universal format and layout of the budget card*/
 function BudgetItem({budget}) {
 
     const calculatePercentage=()=>{

@@ -1,6 +1,6 @@
 import { Trash } from 'lucide-react'
 import React from 'react'
-
+/*Table list for the expenses */
 function ListOfExpenses({ expensesList }) {
     return (
         <div className="mt-5">
@@ -14,9 +14,10 @@ function ListOfExpenses({ expensesList }) {
                 <div key={index} className="grid grid-cols-4 bg-slate-50 p-2">
                     <h2>{expenses.name}</h2>
                     <h2>{expenses.amount}</h2>
-                    <h2>{expenses.createdAt}</h2>
                     <h2>
-                        <Trash className="text-red-500 hover:text-red-700"/>
+                        <Trash className="text-red-500 hover:text-red-700"
+                        onclick={()=> deleteExpense(expenses)}
+                        />
                     </h2>
                 </div>
             ))}

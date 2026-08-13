@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
 import CreateBudget from './CreateBudget'
 import { db } from '@/utils/dbConfig'
@@ -6,7 +7,7 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import { Budgets, Expenses } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import BudgetItem from './BudgetItem'
-
+/* Gets the current user's budget details from the database and puts them in a grid using the BudgetItem file. */
 function BudgetList() {
 
   const [budgetList,setBudgetList]= useState([]);
