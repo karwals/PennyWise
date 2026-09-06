@@ -16,6 +16,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cn": "^0.2.5",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "emoji-picker-react": "^4.19.1",

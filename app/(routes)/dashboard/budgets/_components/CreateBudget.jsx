@@ -23,14 +23,11 @@ import { toast } from 'sonner';
 /* Creating a new budget popup and saving it to the database. */
 function CreateBudget({refreshData}) {
 
-
+/*variables for the emoji icon, emoji picker visibility, and input values*/
   const [emojiIcon,setEmojiIcon]=useState('💰');
   const [openEmojiPicker,setOpenEmojiPicker]=useState(false);
-
   const [name, setName] = useState('');
-
   const [amount, setAmount] = useState('');
-
   const {user}=useUser();
 
   const onCreateBudget=async()=>{
@@ -41,20 +38,29 @@ function CreateBudget({refreshData}) {
     }
   
     const email = user.primaryEmailAddress?.emailAddress;
-    
-    /* Add budget details into table */
-    const result=await db.insert(Budgets)
-    .values({
-      name:name,
-      amount:amount,
-      createdBy: email,
-      icon:emojiIcon
-    /*return the row that it added the budget */
-    }).returning({insertedId:Budgets.id})
-    if(result)
+    try{
+    /* Add budget details into table from the input of the user in the form and put it into the budget table in the database */
+      const result=await db.insert(Budgets).values({
+        name:name,
+        amount:amount,
+        createdBy: email,
+        icon:emojiIcon
+      /*return the row that it added the budget */
+      }).returning({insertedId:Budgets.id})
+      if(result)
+      {
+        refreshData()
+        toast("New budget created successfully!")
+      }
+      else
+      {
+          toast.error("Failed to create new expense")
+      }
+    }
+    /*If there is an error while creating the expense */
+    catch(error)
     {
-      refreshData()
-      toast("New budget created successfully!")
+        toast.error("Failed to create new expense")
     }
   }
   return (
@@ -76,6 +82,7 @@ function CreateBudget({refreshData}) {
           </div>
         </DialogTrigger>
         <DialogContent>
+          {/*Dialog header*/}
           <DialogHeader className="border-b pb-4 border-primary ">
             <DialogTitle>Create New Budget</DialogTitle>
             <DialogDescription>
@@ -104,14 +111,27 @@ function CreateBudget({refreshData}) {
               <div className="mt-3">
                 <h2 className="text-black font-medium my-1">Budget Name</h2>
                 <Input placeholder="e.g. Home Decor" 
-                onChange={(e)=>setName(e.target.value)}/>
+                onChange={(e)=>setName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && name && amount > 0) {
+                      addNewExpense();
+                  }
+                }}
+                />
               </div>
               <div className="mt-3">
                 <h2 className="text-black font-medium my-1">Budget Amount</h2>
                 <Input 
                 type="number"
+                min="0"
                 placeholder="e.g. $700"
-                onChange={(e)=>setAmount(e.target.value)}/>
+                onChange={(e)=>setAmount(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && name && amount > 0) {
+                      addNewExpense();
+                  }
+                }}
+                />
               </div>
               
               
@@ -120,8 +140,8 @@ function CreateBudget({refreshData}) {
               {/*Close the dialog after the budget is created*/}
               <DialogClose asChild>
                 <Button
-                /*Disable the create budget button if either the name or amount is empty */
-                disabled={!(name&&amount)}
+                /*Disable the create budget button if either the name or amount is empty and if the amount is not a positive number */
+                disabled={!(name&&amount > 0)}
                 onClick={onCreateBudget}
                 
                 className="cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300 

@@ -25,7 +25,7 @@ const Toaster = ({
           <WarningIcon className="size-4" />
         ),
         error: (
-          <XCircleIcon className="size-4" />
+          <XCircleIcon color="#D0342C" className="size-4" />
         ),
         loading: (
           <SpinnerIcon className="size-4 animate-spin" />

@@ -8,12 +8,30 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import BudgetItem from '../../budgets/_components/BudgetItem'
 import CreateExpense from '../_components/CreateExpense'
 import ListOfExpenses from '../_components/ListOfExpenses'
+import { Button } from '@/components/ui/button'
+import { Pencil, Trash } from 'lucide-react'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import EditBudget from '../_components/EditBudget'
+
 /*Expenses page(add and view expenses) */
 function ExpensesScreen() {
     const params = useParams()
     const {user} = useUser()
     const [budgetInfo,setBudgetInfo] = useState();
     const [expensesList,setExpensesList] = useState([]);
+    const route = useRouter();
 
     useEffect(() => {
         user&&getBudgetInfo()
@@ -44,9 +62,45 @@ function ExpensesScreen() {
         setExpensesList(result)
         console.log(result)
     }
+    /*Delete the budget and all its expenses from the database */
+    const deleteBudget=async()=>{
+        const deleteExpense =await db.delete(Expenses)
+        .where(eq(Expenses.budgetId,params.id))
+
+        if (deleteExpense){
+            const result =await db.delete(Budgets)
+            .where(eq(Budgets.id,params.id))
+        }
+        toast("Budget deleted successfully!")
+        route.replace("/dashboard/budgets")
+    }
     return (
         <div className="p-5">
-            <h2 className="text-2xl text-primary font-bold">My Expenses</h2>
+            <h2 className="text-2xl text-primary font-bold flex justify-between items-center">My Expenses
+                <div className="gap-2 flex items-center">
+                <EditBudget budgetInfo={budgetInfo}/>
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                    <Button className="flex gap-2" variant="destructive">
+                        <Trash/>Delete
+                    </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your current budget and remove all of its data
+                            from our servers.
+                        </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={()=>deleteBudget()}>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+                </div>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-5">
                 {/*Make sure there is no budget info error and that while the budget info is loading there is a skeleton loader */}
                 {budgetInfo? 
@@ -64,7 +118,8 @@ function ExpensesScreen() {
             </div>
             <div className="mt-6">
                 <h2 className = "text-2xl text-primary font-bold">Expenses</h2>
-                <ListOfExpenses expensesList = {expensesList}/>
+                <ListOfExpenses expensesList = {expensesList}
+                refreshData={()=>getBudgetInfo()}/>
             </div>
         </div>
     )
