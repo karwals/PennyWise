@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogClose,
@@ -15,16 +15,43 @@ import {
 import EmojiPicker from 'emoji-picker-react'
 import { useUser } from '@clerk/nextjs'
 import { Input } from '@/components/ui/input'
+import { eq } from 'drizzle-orm'
+import { toast } from 'sonner'
+import { db } from '@/utils/dbConfig'
+import { Budgets } from '@/utils/schema'
 
-function EditBudget({ budgetInfo }) {
+function EditBudget({ budgetInfo, refreshData }) {
     /*variables for the emoji icon, emoji picker visibility, and input values*/
-    const [emojiIcon, setEmojiIcon] = useState(budgetInfo?.icon || "💰");
+    const [emojiIcon, setEmojiIcon] = useState(budgetInfo?.icon);
     const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-    const [name, setName] = useState("");
-    const [amount, setAmount] = useState("");
-    const { user } = useUser();
-    const onCreateBudget=()=>{
 
+    const [name, setName] = useState();
+    const [amount, setAmount] = useState();
+
+    const { user } = useUser();
+
+    /*Set the input values when the budgetInfo changes*/
+    useEffect(() => {
+        if (budgetInfo) {
+            setEmojiIcon(budgetInfo?.icon);
+            setName(budgetInfo?.name);
+            setAmount(budgetInfo?.amount);
+        }
+    }, [budgetInfo])
+    /*Update the budget in the database and if it happens then refresh the
+    data and sends a toast and if not successfull sends a fail toast
+    */
+    const onCreateBudget = async () => {
+        const result = await db.update(Budgets).set({
+            name: name,
+            amount: amount,
+            icon: emojiIcon,
+        }).where(eq(Budgets.id, budgetInfo.id))
+        /*If the budget is updated successfully refresh the data and send a toast */
+        if (result) {
+            refreshData()
+            toast("Budget updated successfully!")
+        }
     }
     return (
         <div>
@@ -40,16 +67,13 @@ function EditBudget({ budgetInfo }) {
                     {/*Dialog header*/}
                     <DialogHeader className="border-b pb-4 border-primary ">
                         <DialogTitle>Edit Budget</DialogTitle>
-                        <DialogDescription>
-                            Master Your Money One Expense at a Time
-                        </DialogDescription>
                     </DialogHeader>
                     <div>
                         {/*emoji pick for budget card*/}
-                        <h2 className="text-black font-medium my-1">Emoji</h2>
+                        <h2 className="text-black font-medium mt-1">Emoji</h2>
                         <Button variant="outline"
-                            size="lg"
-                            className="text-lg cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300"
+                            size="icon-xl"
+                            className="text-3xl cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300"
                             /*Set emoji picker to the opposite of it's current state'*/
                             onClick={() => setOpenEmojiPicker(!openEmojiPicker)}>
                             {emojiIcon}</Button>
@@ -70,7 +94,7 @@ function EditBudget({ budgetInfo }) {
                                 onChange={(e) => setName(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter" && name && amount > 0) {
-                                        addNewExpense();
+                                        onCreateBudget();
                                     }
                                 }}
                             />
@@ -78,11 +102,13 @@ function EditBudget({ budgetInfo }) {
                         <div className="mt-3">
                             <h2 className="text-black font-medium my-1">Budget Amount</h2>
                             <Input
-                                type="number"
+                                type="text"
+                                inputMode="numeric"
                                 min="0"
-                                placeholder="e.g. $700"
-                                defaultValue={budgetInfo?.amount}
-                                onChange={(e) => setAmount(e.target.value)}
+                                placeholder="e.g. $200"
+                                value={amount || ""}
+                                /*Only allow numbers in the amount input*/
+                                onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter" && name && amount > 0) {
                                         addNewExpense();

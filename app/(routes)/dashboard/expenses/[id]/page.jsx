@@ -78,7 +78,8 @@ function ExpensesScreen() {
         <div className="p-5">
             <h2 className="text-2xl text-primary font-bold flex justify-between items-center">My Expenses
                 <div className="gap-2 flex items-center">
-                <EditBudget budgetInfo={budgetInfo}/>
+                <EditBudget budgetInfo={budgetInfo}
+                refreshData={getBudgetInfo}/>
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                     <Button className="flex gap-2" variant="destructive">

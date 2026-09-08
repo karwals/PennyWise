@@ -8,13 +8,12 @@ function Header() {
   return (
     <div className="p-5 flex items-center justify-between shadow-xl border backdrop-blur-md bg-white/50">
       <Image
-        href = "/app"
+        href="/app"
         src="/logo.svg"
         alt="logo"
         width={200}
         height={100}
       />
-      
       <Show when="signed-out">
         <Button className="hover:bg-primary/60">
           <Link href="/sign-in">Get Started</Link>
@@ -22,10 +21,10 @@ function Header() {
       </Show>
       <Show when="signed-in">
         <div className="flex items-center">
-          <Button className="hover:bg-primary/60" style={{margin: '0px 20px 0px 0px'}}>
+          <Button className="hover:bg-primary/60" style={{ margin: '0px 20px 0px 0px' }}>
             <Link href="/dashboard">Dashboard</Link>
           </Button>
-          <UserButton className="center"/>
+          <UserButton className="center" />
         </div>
       </Show>
     </div>
