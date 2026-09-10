@@ -32,7 +32,7 @@ function BudgetList() {
     setBudgetList(result)
     
   }
-
+  /*This is the main return of the budget list, it has a create budget button and then a grid of the budgets that the user has made*/
   return (
     <div className="mt-10">
       <div className="grid grid-cols-1

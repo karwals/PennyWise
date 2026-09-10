@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 /* The main part of the landing page for the website*/
 export default function Hero() {
   return (
@@ -19,18 +20,13 @@ export default function Hero() {
           </p>
           {/*The buttons on the landing page*/}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
-              href="/sign-in"
-              className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow-2xl hover:bg-primary/60 focus:outline-none sm:w-auto"
-            >
+            <Button size="xl" className="text-2xl">
               Get Started
-            </a>
-            <a
-              href="#"
-              className="block w-full rounded px-12 py-3 text-sm font-medium text-primary shadow-2xl hover:text-primary/60 focus:outline-none sm:w-auto"
-            >
+            </Button>
+            <Button size="xl" variant="outline" className="text-2xl">
               Learn More
-            </a>
+            </Button>
+
           </div>
         </div>
       </div>

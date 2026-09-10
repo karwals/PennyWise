@@ -5,7 +5,6 @@ import EmojiPicker from 'emoji-picker-react'
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -28,6 +27,8 @@ function CreateBudget({ refreshData }) {
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
+  /*controls whether the create budget popup is open so it can be closed from code*/
+  const [open, setOpen] = useState(false);
   const { user } = useUser();
 
   const onCreateBudget = async () => {
@@ -49,6 +50,8 @@ function CreateBudget({ refreshData }) {
       }).returning({ insertedId: Budgets.id })
       if (result) {
         refreshData()
+        /*close the popup now that the budget has been saved*/
+        setOpen(false)
         toast("New budget created successfully!")
       }
       else {
@@ -60,9 +63,16 @@ function CreateBudget({ refreshData }) {
       toast.error("Failed to create new expense")
     }
   }
+  /*Create the budget when the user presses enter in either input box*/
+  const onEnterKey = (e) => {
+    if (e.key === "Enter" && name && amount > 0) {
+      onCreateBudget();
+    }
+  }
+
   return (
     <div>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <div className="bg-slate-100 p-10 rounded-lg 
           items-center flex flex-col border border-dashed 
@@ -109,11 +119,7 @@ function CreateBudget({ refreshData }) {
               <h2 className="text-black font-medium my-1">Budget Name</h2>
               <Input placeholder="e.g. Home Decor"
                 onChange={(e) => setName(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && name && amount > 0) {
-                    addNewExpense();
-                  }
-                }}
+                onKeyDown={onEnterKey}
               />
             </div>
             <div className="mt-3">
@@ -126,27 +132,20 @@ function CreateBudget({ refreshData }) {
                 value={amount || ""}
                 /*Only allow numbers in the amount input*/
                 onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && name && amount > 0) {
-                    addNewExpense();
-                  }
-                }}
+                onKeyDown={onEnterKey}
               />
             </div>
 
 
           </div>
           <DialogFooter className="sm:justify-start border-t border-primary">
-            {/*Close the dialog after the budget is created*/}
-            <DialogClose asChild>
-              <Button
-                /*Disable the create budget button if either the name or amount is empty and if the amount is not a positive number */
-                disabled={!(name && amount > 0)}
-                onClick={onCreateBudget}
-
-                className="cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300 
-                w-full">Create Budget</Button>
-            </DialogClose>
+            {/*The dialog is closed inside onCreateBudget once the budget is saved*/}
+            <Button
+              /*Disable the create budget button if either the name or amount is empty and if the amount is not a positive number */
+              disabled={!(name && amount > 0)}
+              onClick={onCreateBudget}
+              className="cursor-pointer hover:shadow-md hover:-translate-y-1 duration-300
+              w-full">Create Budget</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

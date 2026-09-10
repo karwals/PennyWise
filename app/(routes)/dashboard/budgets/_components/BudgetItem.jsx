@@ -6,8 +6,19 @@ function BudgetItem({budget}) {
 
     const calculatePercentage=()=>{
         const percentage = (budget.totalSpend / budget.amount) * 100;
+        /* Make the percentage a fixed decimal(2) */
         return percentage.toFixed(2);
     }
+    /*Stops the progress bar from going out of the area when overspent on expenses.*/
+    const calculateBarWidth=()=>{
+        const percentage = Number(calculatePercentage());
+        /* if the percentage is 0 it does 0 ans the with and not na*/
+        if(!percentage || percentage < 0) return 0;
+        /* if over 100, use 100, otherwise use the real value. */
+        return percentage > 100 ? 100 : percentage;
+    }
+    /*See if budget is over or not it is a boolean(true or false)*/
+    const isOverBudget = budget.totalSpend > budget.amount;
     return (
         <Link href={'/dashboard/expenses/'+budget?.id} className="flex flex-col justify-between border p-5 rounded-lg cursor-pointer hover:shadow-md hover:-translate-y-2 duration-300 h-36">
             {/* Main budget summary card content. */}
@@ -29,11 +40,17 @@ function BudgetItem({budget}) {
             <div className="pt-5">
                 <div className="flex items-center gap-2 justify-between mb-1">
                     <h2 className="text-xs text-slate-500"> ${budget.totalSpend?budget.totalSpend:0} Spend</h2>
-                    <h2 className="text-xs text-slate-500"> ${budget.amount-budget.totalSpend} Remaining</h2>
+                    {/* If budget is over budget, display over budget message in red; otherwise, display remaining amount in gray */}
+                    <h2 className={`text-xs ${isOverBudget?'text-red-600 font-medium':'text-slate-500'}`}>
+                        {isOverBudget
+                            ? `$${budget.totalSpend-budget.amount} Over Budget`
+                            : `$${budget.amount-budget.totalSpend} Remaining`}
+                    </h2>
                 </div>
                 <div className="w-full bg-slate-300 h-2 rounded-full">
-                    <div className="w-[40%] bg-primary h-2 rounded-full"
-                    style={{width:`${calculatePercentage()}%`}}
+                    {/* Progress bar shows red if over budget and if fin then primary color */}
+                    <div className={`h-2 rounded-full ${isOverBudget?'bg-red-600':'bg-primary'}`}
+                    style={{width:`${calculateBarWidth()}%`}}
                     ></div>
                 </div>
             </div>
