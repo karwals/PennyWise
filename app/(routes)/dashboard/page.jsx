@@ -5,6 +5,7 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import CardInfo from './_components/CardInfo';
 import { Budgets, Expenses } from '@/utils/schema';
+import BarChartDashboard from './_components/BarChartDashboard';
 function Dashboard() {
     const { user } = useUser();
 
@@ -17,7 +18,7 @@ function Dashboard() {
     const getBudgetList = async () => {
         const result = await db.select({
             ...getTableColumns(Budgets),
-            
+
             totalSpend: sql`sum(${Expenses.amount})`.mapWith(Number),
             totalItem: sql`count(${Expenses.id})`.mapWith(Number)
         }).from(Budgets)
@@ -33,10 +34,21 @@ function Dashboard() {
     /*Dashboard page that greets the user and shows them their budget information*/
     return (
         <div className="p-5">
-            <h1 className="font-bold text-3xl text-primary pb-2 border-b-4 border-primary">Hi, {user?.username}</h1>
-            <p className="text-gray-500">Here is what is happening with your money:</p>
+            <h1 className="font-bold text-3xl text-primary pb-1 border-b-4 border-primary">Hi, {user?.username}</h1>
+            <p className="text-gray-500">Here is what's happening with your money:</p>
 
             <CardInfo budgetList={budgetList} />
+            <div className="grid grid-cols-1 md:grid-cols-3 mt-7">
+                <div className="md:col-span-2">
+                    <h2 className="font-bold text-3xl text-primary border-b-4 border-primary mb-5">Activity</h2>
+                    <BarChartDashboard
+                        budgetList={budgetList}
+                    />
+                </div>
+                <div>
+                    Other Content
+                </div>
+            </div>
         </div>
     )
 }

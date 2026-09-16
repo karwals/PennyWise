@@ -128,7 +128,7 @@ function CreateBudget({ refreshData }) {
                 type="text"
                 inputMode="numeric"
                 min="0"
-                placeholder="e.g. $200"
+                placeholder="e.g. 200"
                 value={amount || ""}
                 /*Only allow numbers in the amount input*/
                 onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}

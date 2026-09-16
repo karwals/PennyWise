@@ -22,9 +22,10 @@ export const metadata = {
   title: "PennyWise",
   description: "Master Your Money One Expense at a Time",
 };
-
+/* Sets up the root layout for the application */
 export default function RootLayout({ children }) {
   return (
+    
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}

@@ -1,9 +1,11 @@
 import React from 'react'
 import{LayoutDashboard, PiggyBank, BanknoteArrowDown, CircleFadingArrowUp, User} from 'lucide-react'
-import { UserButton } from '@clerk/nextjs'
+import { useUser, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 /*links for the other pages*/
-function SideBar() {
+function SideBar({ onLinkClick }) {
+    const { user } = useUser();
+
     const menuList=[
         {
             id: 1,
@@ -34,35 +36,40 @@ function SideBar() {
 
 /*Sidebar with the links to the other pages from above*/
     return (
-        <div className="h-screen p-5 border shadow-sm">
-            <img src="/logo.svg"
-            className="flex gap-2 items-center
-                    text-gray-500 font-medium
-                    p-5 cursor-pointer rounded-md
-                    hover:text-primary hover:bg-primary/20 hover:underline
-                    "
-            alt="Logo"
-            width={160}
-            height={100}
-            />
+        <div className=" relative h-screen p-5 border shadow-sm">
+            {/* Logo takes you back to the landing page */}
+            <Link href="/" onClick={onLinkClick}>
+                <img
+                href="/"
+                src="/logo.svg"
+                className="flex gap-2 items-center
+                        text-gray-500 font-medium
+                        p-5 cursor-pointer rounded-md
+                        hover:text-primary hover:bg-primary/20 hover:underline"
+                alt="Logo"
+                width={160}
+                height={100}
+                />
+            </Link>
             {/* Sidebar links for switching between dashboard sections. */}
             <div className='mt-5'>
                 {menuList.map((menu,index)=>(
-                    <Link href={menu.path} key={menu.id}>
+                    <Link href={menu.path} key={menu.id} onClick={onLinkClick}>
                     <h2 className="flex gap-2 items-center
                     text-gray-500 font-medium
                     p-5 cursor-pointer rounded-md
-                    hover:text-primary hover:bg-primary/20 hover:underline
-                    ">
+                    hover:text-primary hover:bg-primary/20 hover:underline">
                         <menu.icon/>
                         {menu.name}
                     </h2>
                     </Link>
                 ))}
             </div>
-            <div className='fixed bottom-10 p-5 flex gap-2 items-center'>
+            <div className="absolute bottom-10 left-0 right-0 p-5 
+            flex gap-2 items-center uppercase font-bold 
+            border-t-2 border-primary border-dashed">
                 <UserButton/>
-                profile
+                {user?.username}
             </div>
         </div>
     )

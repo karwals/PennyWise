@@ -73,14 +73,16 @@ function ExpensesScreen() {
         toast("Budget deleted successfully!")
         route.replace("/dashboard/budgets")
     }
+    /*Displays the budget information and the list of expenses for the selected budget */
     return (
         <div className="p-5">
-            <div className="flex justify-between items-center">
-                <h2 className="text-2xl text-primary font-bold">
-                    My Expenses</h2>
+            <div className="flex justify-between items-center pb-1 border-b-4 border-primary">
+                <h1 className="font-bold text-3xl text-primary">My Expenses</h1>
                 <div className="gap-2 flex items-center">
+                    {/*Edit budget button that opens a edit popup */}
                     <EditBudget budgetInfo={budgetInfo}
                         refreshData={getBudgetInfo} />
+                    {/*Delete budget button with a confirmation dialog */}
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
                             <Button className="flex gap-2" variant="destructive">
