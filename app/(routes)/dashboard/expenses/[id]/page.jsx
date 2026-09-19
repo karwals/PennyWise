@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import { db } from '@/utils/dbConfig'
 import { Budgets, Expenses } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
-import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
+import { and, desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import BudgetItem from '../../budgets/_components/BudgetItem'
 import CreateExpense from '../_components/CreateExpense'
 import ListOfExpenses from '../_components/ListOfExpenses'
@@ -38,20 +38,36 @@ function ExpensesScreen() {
     }, [user])
     /* Gets the selected budget and its expenses */
     const getBudgetInfo = async () => {
+        /* gets the budget info from the database. It also gets the total spend and total item count for the selected budget. */
         const result = await db.select({
             ...getTableColumns(Budgets),
             totalSpend: sql`sum(${Expenses.amount})`.mapWith(Number),
             totalItem: sql`count(${Expenses.id})`.mapWith(Number)
         }).from(Budgets)
+            /*Left join the expenses table to get the total spend and total item count for the selected budget */
             .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
-            .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
-            .where(eq(Budgets.id, params.id))
+            /*Make sure that the budget is only for the one that the current user has made and that it is the selected budget */
+            .where(
+                and(
+                    eq(Budgets.id, Number(params.id)),
+                    eq(
+                        Budgets.createdBy,
+                        user.primaryEmailAddress.emailAddress
+                    )
+                )
+            )
             .groupBy(Budgets.id)
+        /*If the budget is not found, redirect to the budgets page */
+        if (!result[0]) {
+            route.replace("/dashboard/budgets");
+            return;
+        }
+        /*Set the budget info state to the selected budget */
+        setBudgetInfo(result[0]);
 
-        setBudgetInfo(result[0])
-
-        getExpensesList()
+        getExpensesList();
     }
+
     /* Gets the list of expenses for the selected budget */
     const getExpensesList = async () => {
         const result = await db.select()
@@ -86,7 +102,7 @@ function ExpensesScreen() {
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
                             <Button className="flex gap-2" variant="destructive">
-                                <Trash/>Delete
+                                <Trash />Delete
                             </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>

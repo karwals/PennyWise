@@ -26,6 +26,7 @@ function BudgetList() {
       totalSpend: sql`sum(${Expenses.amount})`.mapWith(Number),
       totalItem: sql`count(${Expenses.id})`.mapWith(Number)
     }).from(Budgets)
+      /*Left join the expenses table to get the total spend and total item count for each budget. */
       .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
       /*Make it so that the budget are only for the ones that the current user has made*/
       .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
