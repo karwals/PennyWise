@@ -62,7 +62,7 @@ function ExpensesScreen() {
             route.replace("/dashboard/budgets");
             return;
         }
-        /*Set the budget info state to the selected budget */
+        /* Get the first matching budget from the result list and save it */
         setBudgetInfo(result[0]);
 
         getExpensesList();
