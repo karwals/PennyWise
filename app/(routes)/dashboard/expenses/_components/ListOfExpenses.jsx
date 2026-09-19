@@ -17,7 +17,7 @@ function ListOfExpenses({ expensesList, refreshData }) {
         }
     }
     return (
-        <div className="mt-5">
+        <div>
             <div className="grid grid-cols-3 bg-slate-200 p-2 rounded-t-lg">
                 <h2 className="font-bold">Name</h2>
                 <h2 className="font-bold">Amount</h2>

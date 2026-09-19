@@ -1,5 +1,5 @@
 import React from 'react'
-import{LayoutDashboard, PiggyBank, BanknoteArrowDown, CircleFadingArrowUp, User} from 'lucide-react'
+import{LayoutDashboard, PiggyBank, BanknoteArrowDown} from 'lucide-react'
 import { useUser, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 /*links for the other pages*/
@@ -25,18 +25,12 @@ function SideBar({ onLinkClick }) {
             icon: BanknoteArrowDown,
             path: "/dashboard/expenses"
         },
-        {
-            id: 4,
-            name: "Upgrade",
-            icon: CircleFadingArrowUp,
-            path: "/dashboard/upgrade"
-        }
     ]
 
 
 /*Sidebar with the links to the other pages from above*/
     return (
-        <div className=" relative h-screen p-5 border shadow-sm">
+        <div className=" relative h-screen p-5 border shadow-sm bg-white">
             {/* Logo takes you back to the landing page */}
             <Link href="/" onClick={onLinkClick}>
                 <img
@@ -45,7 +39,7 @@ function SideBar({ onLinkClick }) {
                 className="flex gap-2 items-center
                         text-gray-500 font-medium
                         p-5 cursor-pointer rounded-md
-                        hover:text-primary hover:bg-primary/20 hover:underline"
+                        hover:text-primary hover:bg-primary/20 hover:underline active:scale-95"
                 alt="Logo"
                 width={160}
                 height={100}
@@ -58,7 +52,7 @@ function SideBar({ onLinkClick }) {
                     <h2 className="flex gap-2 items-center
                     text-gray-500 font-medium
                     p-5 cursor-pointer rounded-md
-                    hover:text-primary hover:bg-primary/20 hover:underline">
+                    hover:text-primary hover:bg-primary/20 hover:underline active:scale-95">
                         <menu.icon/>
                         {menu.name}
                     </h2>
@@ -68,7 +62,7 @@ function SideBar({ onLinkClick }) {
             <div className="absolute bottom-10 left-0 right-0 p-5 
             flex gap-2 items-center uppercase font-bold 
             border-t-2 border-primary border-dashed">
-                <UserButton/>
+                <UserButton alt="User profile"/>
                 {user?.username}
             </div>
         </div>

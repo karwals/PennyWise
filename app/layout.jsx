@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/*what is controled by clerk*/}
+        {/*what is controlled by clerk*/}
         <ClerkProvider>
           {children}
           <Toaster/>

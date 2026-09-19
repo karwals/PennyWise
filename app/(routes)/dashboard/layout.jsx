@@ -49,7 +49,7 @@ function DashboardLayout({ children }) {
                         className="absolute inset-0 bg-black/50"
                         onClick={()=>setSideBarOpen(false)}
                     />
-                    <div className="relative w-64 h-full bg-white">
+                    <div className="relative w-64 h-full">
                         <SideBar onLinkClick={()=>setSideBarOpen(false)}/>
                     </div>
                 </div>

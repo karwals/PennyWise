@@ -38,10 +38,10 @@ function CreateExpense({ budgetId, user, refreshData }) {
     return (
         <div>
 
-            <div className='border p-5 rounded-lg'>
+            <div className="border p-5 rounded-lg">
                 <h2 className="text-2xl font-bold text-primary">Create Expense</h2>
                 {/*The place for the expense details input */}
-                <div className='mt-3'>
+                <div className="mt-3">
                     <h2 className="text-black font-medium my-1">Expense Name</h2>
                     <Input
                         placeholder="e.g. New Couch"
@@ -54,13 +54,16 @@ function CreateExpense({ budgetId, user, refreshData }) {
                         }}
                     />
                 </div>
-                <div className='mt-3'>
-                    <h2 className="text-black font-medium my-1">Expense Amount</h2>
+                <div className="mt-3">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-black font-medium my-1">Expense Amount</h2>
+                        <p className="text-sm text-gray-500">//Do not include the dollar sign</p>
+                    </div>
                     <Input
                         type="text"
                         inputMode="numeric"
                         min="0"
-                        placeholder="e.g. $200"
+                        placeholder="e.g. 200"
                         value={amount || ""}
                         /*Only allow numbers in the amount input*/
                         onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
