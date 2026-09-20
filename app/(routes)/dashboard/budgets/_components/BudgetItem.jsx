@@ -26,7 +26,7 @@ function BudgetItem({ budget }) {
         <Link href={"/dashboard/expenses/" + budget?.id} >
             <div
                 className="flex flex-col justify-between border rounded-lg p-5
-                cursor-pointer hover:shadow-md hover:-translate-y-2 duration-300 h-36">
+                cursor-pointer hover:shadow-md hover:-translate-y-3 duration-300 h-36 backdrop-blur-md">
                 {/* Main budget summary card content. */}
                 <div className="flex gap-2 items-center justify-between">
                     <div className="flex items-center">

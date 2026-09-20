@@ -9,7 +9,7 @@ import BudgetItem from '../../budgets/_components/BudgetItem'
 import CreateExpense from '../_components/CreateExpense'
 import ListOfExpenses from '../_components/ListOfExpenses'
 import { Button } from '@/components/ui/button'
-import { Pencil, Trash } from 'lucide-react'
+import { ArrowLeft, LucideChevronLeft, Pencil, Trash } from 'lucide-react'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -27,10 +27,13 @@ import EditBudget from '../_components/EditBudget'
 
 /*Expenses page(add and view expenses) */
 function ExpensesScreen() {
+    /*Get the budget id from the url and the current user */
     const params = useParams()
     const { user } = useUser()
+    /*State variables for the budget info and the list of expenses for the selected budget */
     const [budgetInfo, setBudgetInfo] = useState();
     const [expensesList, setExpensesList] = useState([]);
+    /*Get the router if i need to redirect the user*/
     const route = useRouter();
 
     useEffect(() => {
@@ -89,11 +92,23 @@ function ExpensesScreen() {
         toast("Budget deleted successfully!")
         route.replace("/dashboard/budgets")
     }
+
+
     /*Displays the budget information and the list of expenses for the selected budget */
     return (
         <div className="p-5">
             <div className="flex justify-between items-center pb-1 border-b-4 border-primary">
-                <h1 className="font-bold text-3xl text-primary">My Expenses</h1>
+                <div className="flex items-center">
+                    <button onClick={() => route.back()}
+                        className="cursor-pointer">
+                        <ArrowLeft
+                            size={30}
+                            strokeWidth={3}
+                            className="text-primary hover:scale-80"
+                        />
+                    </button>
+                    <h1 className="font-bold text-3xl text-primary">My Expenses</h1>
+                </div>
                 <div className="gap-2 flex items-center">
                     {/*Edit budget button that opens a edit popup */}
                     <EditBudget budgetInfo={budgetInfo}

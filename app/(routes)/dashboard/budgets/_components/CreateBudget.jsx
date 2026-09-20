@@ -76,7 +76,7 @@ function CreateBudget({ refreshData }) {
         <DialogTrigger asChild>
           <div className="bg-slate-100 p-10 rounded-lg 
           items-center flex flex-col border border-dashed 
-          cursor-pointer hover:shadow-md hover:-translate-y-2 duration-300"
+          cursor-pointer hover:shadow-md hover:-translate-y-3 duration-300"
             onClick={() => {
               /* clear old name, amount, and emoji data*/
               setName('');
