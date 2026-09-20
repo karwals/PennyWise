@@ -15,7 +15,7 @@ function Header() {
         width={240}
         height={120}
         /*240px when the screen is wider then the pre set small and when smaller 160px. */
-        className="w-[160px] sm:w-[240px] h-auto -ml-5 -my-5"
+        className="w-[160px] sm:w-[240px] h-auto"
       />
       {/*If the user is signed out show the get started button and if they are 
       signed in show the dashboard button and the user profile*/}
