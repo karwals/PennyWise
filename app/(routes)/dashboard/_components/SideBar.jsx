@@ -30,14 +30,14 @@ function SideBar({ onLinkClick }) {
 
 /*Sidebar with the links to the other pages from above*/
     return (
-        <div className=" relative h-screen p-5 border shadow-sm bg-white">
+        <div className=" relative h-screen p-3 border shadow-sm bg-white">
             {/* Logo takes you back to the landing page */}
             <Link href="/dashboard" onClick={onLinkClick}>
                 <img
                 src="/Logo.png"
                 className="flex items-center w-full h-auto
                         cursor-pointer
-                        hover:bg-primary/20 hover:underline"
+                        hover:bg-primary/20 hover:underline hover:border-primary/20 hover:rounded-lg p-2"
                 alt="Logo"
                 width={400}
                 height={200}
