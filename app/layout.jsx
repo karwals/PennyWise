@@ -17,7 +17,7 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
 });
-
+/* Sets the website title, description */
 export const metadata = {
   title: "PennyWise",
   description: "Master Your Money One Expense at a Time",

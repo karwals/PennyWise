@@ -32,17 +32,15 @@ function SideBar({ onLinkClick }) {
     return (
         <div className=" relative h-screen p-5 border shadow-sm bg-white">
             {/* Logo takes you back to the landing page */}
-            <Link href="/" onClick={onLinkClick}>
+            <Link href="/dashboard" onClick={onLinkClick}>
                 <img
-                href="/"
-                src="/logo.svg"
-                className="flex gap-2 items-center
-                        text-gray-500 font-medium
-                        p-5 cursor-pointer rounded-md
-                        hover:text-primary hover:bg-primary/20 hover:underline active:scale-95"
+                src="/Logo.png"
+                className="flex items-center w-full h-auto
+                        cursor-pointer
+                        hover:bg-primary/20 hover:underline"
                 alt="Logo"
-                width={160}
-                height={100}
+                width={400}
+                height={200}
                 />
             </Link>
             {/* Sidebar links for switching between dashboard sections. */}

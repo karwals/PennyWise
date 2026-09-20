@@ -13,11 +13,11 @@ export default function Hero() {
         <div className="mx-auto max-w-xl text-center">
           <h1 className="text-3xl font-extrabold sm:text-5xl">
             Master Your Money
-            <strong className="block font-extrabold text-primary sm:block">
+            <a className="block font-extrabold text-primary sm:block">
               One Expense at a Time
-            </strong>
+            </a>
           </h1>
-          <p className="mt-4 sm:text-xl/relaxed">
+          <p className="mt-4 sm:text-xl">
             Easily monitor your expenses, set budgets, and understand
             where your money goes all in one place.
           </p>
@@ -30,13 +30,10 @@ export default function Hero() {
               </Button>
             </Show>
             <Show when="signed-in">
-              <Button size="xl" className="text-xl hover:bg-primary/60">
+              <Button size="xl" className="w-full text-xl hover:bg-primary/60">
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
             </Show>
-            <Button size="xl" variant="outline" className="text-xl">
-              Learn More
-            </Button>
 
           </div>
         </div>
