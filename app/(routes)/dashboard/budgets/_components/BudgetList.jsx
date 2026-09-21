@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import CreateBudget from './CreateBudget'
-import { db } from '@/utils/dbConfig'
-import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
-import { Budgets, Expenses } from '@/utils/schema'
+import { getBudgetList } from '../../_components/budgetQueries';
 import { useUser } from '@clerk/nextjs'
 import BudgetItem from './BudgetItem'
 /* Gets the current user's budget details from the database and puts them in a grid using the BudgetItem file. */
@@ -14,27 +12,14 @@ function BudgetList() {
   const { user } = useUser();
   
   useEffect(() => {
-    getBudgetList()
+    loadBudgets()
   }, [user])
   /*where it the skeleton is being shown or not*/
   const [loading, setLoading] = useState(true)
   /*Used to get budget list from database*/
-  const getBudgetList = async () => {
+  const loadBudgets = async () => {
     /* gets the budget list from the database. It also gets the total spend and total item count for each budget. */
-    const result = await db.select({
-      ...getTableColumns(Budgets),
-      totalSpend: sql`sum(${Expenses.amount})`.mapWith(Number),
-      totalItem: sql`count(${Expenses.id})`.mapWith(Number)
-    }).from(Budgets)
-      /*Left join the expenses table to get the total spend and total item count for each budget. */
-      .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
-      /*Make it so that the budget are only for the ones that the current user has made*/
-      .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
-      /*Group by the budget id so that the total spend and total item count are correct for each budget. */
-      .groupBy(Budgets.id)
-      /*I also decided that i wanted to make the newest budget would be at the top*/
-      .orderBy(desc(Budgets.id))
-    setBudgetList(result)
+    setBudgetList(await getBudgetList(user?.primaryEmailAddress?.emailAddress))
     /*stop skeleton loader when the budget list is loaded*/
     setLoading(false)
 
@@ -47,7 +32,7 @@ function BudgetList() {
       gap-5">
         {/*Makes sure to get the new budget list after a new one is added so the new one is also there*/}
         <CreateBudget
-          refreshData={getBudgetList}
+          refreshData={loadBudgets}
         />
         {/*while the budget list is loading it will show the skeleton loader
       and once it is loaded it will show the budget card.
