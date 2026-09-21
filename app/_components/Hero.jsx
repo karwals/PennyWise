@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
       </div>
       {/*The image on the landing page*/}
-      <Image src="./Dashboard.png" alt="Dashboard"
+      <img src="./Dashboard.png" alt="Dashboard"
         width={1000}
         height={700}
         className="mt-5 rounded-xl border-2"
