@@ -123,7 +123,10 @@ function CreateBudget({ refreshData }) {
               />
             </div>
             <div className="mt-3">
-              <h2 className="text-black font-medium my-1">Budget Amount</h2>
+              <div className="flex items-center justify-between">
+                        <h2 className="text-black font-medium my-1">Budget Amount</h2>
+                        <p className="text-sm text-gray-500">//Do not include the dollar sign</p>
+                    </div>
               <Input
                 type="text"
                 inputMode="numeric"
