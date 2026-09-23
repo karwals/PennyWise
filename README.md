@@ -1,4 +1,4 @@
-I am making a Money Management website. I deciding to solve the problem of people spending money on things they can’t afford and ending up in debt without even realizing. So, I wanted to create a product that helped them during all there money into one place.
+I am making a Money Management website. I deciding to solve the problem of people spending money on things they can’t afford and ending up in debt without even realizing. So, I wanted to create a product that helped them veiw all there money into one place.
 
 My ended user is going to be and the people that I fill need this the most 15-19 year old. I have 15-19 year old as from what I had researched I had found out that it is good for young people to start to learn about their money and how they should manage. This is Because if they learn how to manage their money early on, they can create better habits. I believe that the best why to do this is by making a website which can easily show you were you are spending you money and where you might be spending too much.
 
