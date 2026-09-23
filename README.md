@@ -1,36 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+I am making a Money Management website. This is different to what a little bit different to what I had planned to make in the end of the last assessment. The reason for this change is that I did not have as much interest in that anymore, but I still wanted to do something similar and ended up deciding to solve the problem of people spending money on things they can’t afford and ending up in debt without even realizing. So, I wanted to create a product that  helped them during all there money into one place.
 
-## Getting Started
+My ended user is going to be and the people that I fill need this the most 15-19 year old. I have 15-19 year old as from what I had researched I had found out that it is good for young people to start to learn about their money and how they should manage. This is Because if they learn how to manage their money early on, they can create better habits. I believe that the best why to do this is by making a website which can easily show you were you are spending you money and where you might be spending too much.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Features:
+1. Add, edit, and remove budgets
+2. Create and delete expenses specified to the budget
+3. User log-in and sign-up
+4. Budgets and expenses stored online in a database for easy access and for you to be able to access on different devices
+5. Dashboard page with a summery of your budgets and expenses in one place
