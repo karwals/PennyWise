@@ -18,7 +18,14 @@ export default function Page() {
                 ))}
             </div>
             <div className="relative z-10">
-                <SignIn/>
+                {/* After sign-in or sign-up, check whether the user has a budget before choosing which page to show. */}
+                <SignIn
+                    forceRedirectUrl="/after-sign-in"
+                    /*applies after signing in.*/
+                    signUpUrl="/sign-up"
+                    /*applies after signing up.*/
+                    signUpForceRedirectUrl="/after-sign-in"
+                />
             </div>
             
         </div>
